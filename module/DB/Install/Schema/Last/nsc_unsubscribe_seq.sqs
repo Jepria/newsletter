@@ -1,0 +1,5 @@
+-- sequence: nsc_unsubscribe_seq
+-- Последовательность для генерации первичного ключа <nsc_unsubscribe>.
+create sequence
+  nsc_unsubscribe_seq
+/

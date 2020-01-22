@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="Windows-1251"?>
+<map>
+  <map_version>1.3</map_version>
+  <name>NewsLetterCore</name>
+  <description></description>
+  <version>1.0.0</version>
+  <prefix></prefix>
+  <team>
+    <programmerDB></programmerDB>
+    <programmerAPP></programmerAPP>
+    <analyst></analyst>
+  </team>
+  <request>
+    <msp></msp>
+  </request>
+  <path>p/javaenterpriseplatform/svn/Module/NewsletterCore</path>
+  <initialPath>p/javaenterpriseplatform/svn/Module/NewsletterCore/Trunk@397</initialPath>
+  <db>
+    <database>
+      <instance></instance>
+      <table></table>
+      <package>pkg_NewsLetterCore</package>
+    </database>
+  </db>
+  <app>
+  </app>
+  <batchSpec></batchSpec>
+  <diagram>
+    <database></database>
+    <process></process>
+    <infrastructure></infrastructure>
+  </diagram>
+  <depend>
+    <module></module>
+    <link></link>
+  </depend>
+  <image></image>
+</map>

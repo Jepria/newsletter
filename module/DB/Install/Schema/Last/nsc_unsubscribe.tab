@@ -1,0 +1,43 @@
+-- table: nsc_unsubscribe
+-- Данные отписки.
+create table
+  nsc_unsubscribe
+(
+  unsubscribe_id                  integer                             not null
+  , project_id                      integer                             not null
+  , recipient                     varchar2(255)                       not null
+  , date_ins                      date                default sysdate not null
+  , operator_id                   integer                             not null
+  , constraint nsc_unsubscribe_pk primary key
+    (unsubscribe_id)
+    using index tablespace &indexTablespace
+  , constraint nsc_unsubscribe_uk unique
+    (recipient, project_id)
+    using index tablespace &indexTablespace
+  , constraint nsc_unsubscribe_ck_recipient check (
+      recipient = replace(lower(recipient), ' ', '')
+    )
+)
+/
+
+
+
+comment on table nsc_unsubscribe is
+  'Данные отписки [ SVN root: p/javaenterpriseplatform/svn/Module/NewsletterCore]'
+/
+comment on column nsc_unsubscribe.unsubscribe_id is
+  'Id записи по отписки от рассылки'
+/
+comment on column nsc_unsubscribe.recipient is
+  'Получатель(и) сообщения'
+/
+comment on column nsc_message.project_id is
+  'Id проекта рассылки. Внешний ключ.'
+/
+comment on column nsc_unsubscribe.date_ins is
+  'Дата создания записи'
+/
+comment on column nsc_unsubscribe.operator_id is
+  'Id оператора, меняющего запись'
+/
+

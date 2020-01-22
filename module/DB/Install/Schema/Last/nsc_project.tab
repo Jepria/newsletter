@@ -1,0 +1,91 @@
+-- table: nsc_project
+-- Проекты.
+create table
+  nsc_project
+(
+  project_id                      integer                             not null
+  , project_short_name            varchar2(30)                        not null
+  , project_name                  varchar2(255)                       not null
+  , project_name_en               varchar2(255)
+  , subject                       varchar2(100)                       not null
+  , description                   varchar2(4000)
+  , batch_short_name              varchar2(50)
+  , message_template_text         clob
+  , message_template_path         varchar2(1000)
+  , is_html                       number(1,0)
+  , unsubscribe_success_url       varchar2(1000)
+  , unsubscribe_fail_url          varchar2(1000)
+  , sender                        varchar2(100)
+  , date_ins                      date                default sysdate not null
+  , operator_id                   integer                             not null
+  , constraint nsc_project_pk primary key
+    (project_id)
+    using index tablespace &indexTablespace
+  , constraint nsc_project_uk unique
+    (project_short_name)
+    using index tablespace &indexTablespace
+  , constraint nsc_project_ck_template check
+    (
+      message_template_text is null
+      and message_template_path is null
+      or
+      message_template_text is null
+      and message_template_path is not null
+      or
+      message_template_text is not null
+      and message_template_path is null
+    )
+)
+/
+
+
+
+comment on table nsc_project is
+  'Проекты [ SVN root: p/javaenterpriseplatform/svn/Module/NewsletterCore]'
+/
+comment on column nsc_project.project_id is
+  'Id проекта'
+/
+comment on column nsc_project.project_short_name is
+  'Уникальное короткое наименование проекта'
+/
+comment on column nsc_project.project_name is
+  'Наименование проекта на языке по умолчанию.'
+/
+comment on column nsc_project.project_name_en is
+  'Наименование проекта на английском языке.'
+/
+comment on column nsc_project.subject is
+  'Тема сообщения'
+/
+comment on column nsc_project.description is
+  'Описание проекта.'
+/
+comment on column nsc_project.batch_short_name is
+  'Наименование батча на английском языке. Без внешнего ключа, чтобы уменьшить зависимости'
+/
+comment on column nsc_project.message_template_text is
+  'Текст шаблона сообщений'
+/
+comment on column nsc_project.message_template_path is
+  'Файловый путь к тексту шаблона сообщения'
+/
+comment on column nsc_project.is_html is
+  'Является ли сообщение HTML'
+/
+comment on column nsc_project.unsubscribe_success_url is
+  'URL страницы при успешной отписке'
+/
+comment on column nsc_project.unsubscribe_fail_url is
+  'URL страницы при неуспешной отписке'
+/
+comment on column nsc_project.sender is
+  'Отправитель сообщения по-умолчанию'
+/
+comment on column nsc_project.date_ins is
+  'Дата создания записи'
+/
+comment on column nsc_project.operator_id is
+  'Id оператора, меняющего запись'
+/
+

@@ -1,0 +1,5 @@
+-- sequence: nsc_message_seq
+-- Последовательность для генерации первичного ключа <nsc_message>.
+create sequence
+  nsc_message_seq
+/

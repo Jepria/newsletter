@@ -1,0 +1,5 @@
+-- sequence: nsc_project_seq
+-- Генерация первичного ключа для <nsc_project>.
+create sequence
+  nsc_project_seq
+/

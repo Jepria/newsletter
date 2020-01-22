@@ -1,0 +1,47 @@
+-- table: nsc_message_tmp
+-- Сообщения для отправки.
+create global temporary table
+  nsc_message_tmp
+(
+  recipient                 varchar(1000)                             not null
+, sender                    varchar(1000)
+, message_text              clob
+, subject                   varchar2(100)
+, macro_data                varchar(4000)
+, is_html                   number(1,0)
+, constraint nsc_message_tmp_ck_text check (
+    message_text is not null
+    and macro_data is null
+    or
+    message_text is null
+  )
+, constraint nsc_message_tmp_ck_is_html check (is_html in (0,1))
+)
+on commit delete rows
+/
+
+
+
+comment on table nsc_message_tmp is
+  'Сообщения для отправки [ SVN root: javaenterpriseplatform/svn/Module/NewsletterCore]'
+/
+comment on column nsc_message_tmp.recipient is
+  'Получатель(и) сообщения.'
+/
+comment on column nsc_message_tmp.sender is
+  'Отправитель сообщения'
+/
+comment on column nsc_message_tmp.message_text is
+  'Тело сообщения. Если не задано и не задан шаблон в проекте – выбрасывается исключение.'
+/
+comment on column nsc_message_tmp.subject is
+  'Тема сообщений. Если не задано, берётся из шаблона проекта'
+/
+comment on column nsc_message_tmp.macro_data is
+  'Значения макропеременных в формате: <переменная>=<значение>;<переменная>=<значение>.'
+/
+comment on column nsc_message_tmp.is_html is
+  'Интерпретировать ли тело сообщения как HTML ( по-умолчанию нет).'
+/
+
+

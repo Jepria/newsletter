@@ -1,0 +1,42 @@
+-- table: nsc_message
+-- Сообщения
+create table
+  nsc_message
+(
+  message_key                     varchar2(50)                        not null
+, project_id                      integer                             not null
+, recipient                       varchar(255)
+, message_id                      integer
+, date_ins                        date                default sysdate not null
+, operator_id                     integer                             not null
+, constraint nsc_message_pk primary key
+  (message_key)
+  using index tablespace &indexTablespace
+, constraint nsc_message_uk unique
+  (message_id)
+  using index tablespace &indexTablespace
+)
+/
+
+
+
+comment on table nsc_message is
+  'Сообщения [SVN root: javaenterpriseplatform/svn/Module/NewsletterCore]'
+/
+comment on column nsc_message.message_key is
+  'Уникальный ключ сообщения. Генерируется с помощью последовательности и системной функции.'
+/
+comment on column nsc_message.project_id is
+  'Id проекта рассылки. Внешний ключ.'
+/
+comment on column nsc_message.recipient is
+  'Получатель(и) сообщения'
+/
+comment on column nsc_message.message_id is
+  'message_id модуля Mail'
+/
+comment on column nsc_message.date_ins is
+  'Дата добавления записи'
+/
+
+
